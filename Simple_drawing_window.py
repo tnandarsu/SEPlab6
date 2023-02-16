@@ -33,6 +33,23 @@ class Simple_drawing_window(QWidget):
         p.drawPixmap(QRect(200, 100, 320, 320), self.rabbit)
         p.end()
 
+class Simple_drawing_window_3(QWidget):
+    def __init__(self):
+        QWidget.__init__(self, None)
+        self.setWindowTitle("Simple Drawing Window 3")
+        self.rabbit = QPixmap("images/rabbit.png")
+
+    def paintEvent(self, e):
+        p = QPainter()
+        p.begin(self)
+
+        p.setPen(QColor(0, 0, 0))
+        p.setBrush(QColor(0, 127, 0))
+        for x in range(24):
+            p.drawEllipse(250, 250, 100, 100)
+            p.rotate(15)
+        p.end()
+
 def main():
     app = QApplication(sys.argv)
 
