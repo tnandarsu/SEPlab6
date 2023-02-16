@@ -31,11 +31,42 @@ class Simple_drawing_window(QWidget):
         p.drawPixmap(QRect(200, 100, 320, 320), self.rabbit)
         p.end()
 
+class Simple_drawing_window2(QWidget):
+    def __init__(self):
+        QWidget.__init__(self, None)
+        self.setWindowTitle("Simple Drawing2")
+        self.rabbit = QPixmap("images/rabbit.png")
+    
+    def paintEvent(self, e):
+        paint = QPainter()
+        paint.begin(self)
+
+        # make a white drawing background
+        paint.setBrush(Qt.white)
+
+        # for circle make the ellipse radii match
+        radx = 100
+        rady = 100
+        # draw red circles
+        paint.setPen(Qt.red)
+        for k in range(125, 220, 10):
+            center = QPoint(k, k)
+            # optionally fill each circle yellow
+            paint.setBrush(Qt.yellow)
+            paint.drawEllipse(center, radx, rady)
+        paint.drawPixmap(QRect(200, 100, 320, 320), self.rabbit)
+        paint.end()
+        
+        
+
 def main():
     app = QApplication(sys.argv)
 
     w = Simple_drawing_window()
     w.show()
+
+    w2 = Simple_drawing_window2()
+    w2.show()
 
     return app.exec()
 
