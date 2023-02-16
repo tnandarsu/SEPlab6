@@ -1,7 +1,9 @@
-import sys
+import sys, random
 from PySide6.QtCore import *
 from PySide6.QtWidgets import *
 from PySide6.QtGui import *
+from PySide6.QtGui import QPainter, QBrush, QPen
+
 
 class Simple_drawing_window(QWidget):
     def __init__(self):
@@ -31,11 +33,29 @@ class Simple_drawing_window(QWidget):
         p.drawPixmap(QRect(200, 100, 320, 320), self.rabbit)
         p.end()
 
+class Simple_drawing_window1(QWidget):
+    def __init__(self):
+        QWidget.__init__(self, None)
+        self.setWindowTitle("Simple Drawing 1")
+        self.apple = QPixmap("images/apple.png")
+
+    def paintEvent(self, e):
+        p = QPainter()
+        p.begin(self)
+
+        p.drawPixmap(QRect(200, 100, 320, 320), self.apple)
+        p.end()
+        
+    
+
 def main():
     app = QApplication(sys.argv)
 
     w = Simple_drawing_window()
     w.show()
+
+    w1 = Simple_drawing_window1()
+    w1.show()
 
     return app.exec()
 
