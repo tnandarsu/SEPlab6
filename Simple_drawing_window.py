@@ -77,6 +77,19 @@ class Simple_drawing_window_3(QWidget):
             p.rotate(15)
         p.end()
 
+class Simple_drawing_window1(QWidget):
+    def __init__(self):
+        QWidget.__init__(self, None)
+        self.setWindowTitle("Simple Drawing")
+        self.apple = QPixmap("images/apple.png")
+
+    def paintEvent(self, e):
+        p = QPainter()
+        p.begin(self)
+
+        p.drawPixmap(QRect(200, 100, 320, 320), self.apple)
+        p.end()
+
 def main():
     app = QApplication(sys.argv)
 
@@ -88,6 +101,9 @@ def main():
     
     w3 = Simple_drawing_window_3()
     w3.show()
+
+    w1 = Simple_drawing_window1()
+    w1.show()
 
     return app.exec()
 
