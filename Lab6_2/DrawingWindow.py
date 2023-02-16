@@ -9,7 +9,7 @@ class DrawingWindow(QWidget):
         self.setGeometry(0, 0, 500, 100)
 
         self.drawing = False
-        self.brushSize = 12
+        self.brushSize = 5
         self.previousPoint = QPoint()
         self.drawingWindow = QWidget()
 
@@ -24,7 +24,7 @@ class DrawingWindow(QWidget):
     def mouseMoveEvent(self, e):
         if (e.buttons() and Qt.LeftButton) and self.drawing:
             painter = QPainter(self.image)
-            painter.setPen(QPen(Qt.black, self.brushSize))
+            painter.setPen(QPen(Qt.green, self.brushSize))
 
             painter.drawLine(self.previousPoint, e.pos())
 
@@ -39,15 +39,36 @@ class DrawingWindow(QWidget):
         canvasPainter = QPainter(self)
         canvasPainter.drawImage(self.rect(), self.image, self.image.rect())
 
-#    def clear(self):
-#        self.image.fill(Qt.white)
-#        self.update()
+    def clear(self):
+        self.image.fill(Qt.white)
+        self.update()
+class SimplePaintProgram(QWidget):
+    def __init__(self):
+        QWidget.__init__(self, None)
+        self.setWindowTitle("Simple Paint Program")
+        self.setGeometry(0,0,500,500)
 
+        layout = QVBoxLayout()
+        self.drawingWindow = DrawingWindow()
+
+
+        self.clear_button = QPushButton("Clear", self)
+        self.clear_button.clicked.connect(self.drawingWindow.clear)
+        self.clear_button.setGeometry(10, 130, 340, 40)
+
+        layout.addWidget(self.drawingWindow)
+        layout.addWidget(self.clear_button)
+        self.setLayout(layout)
+
+        self.show()
 
 
 
 def main():
     app = QApplication(sys.argv)
+
+    w = SimplePaintProgram()
+    w.show()
 
     return app.exec()
 
