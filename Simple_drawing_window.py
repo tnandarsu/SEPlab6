@@ -32,6 +32,19 @@ class Simple_drawing_window(QWidget):
 
         p.drawPixmap(QRect(200, 100, 320, 320), self.rabbit)
         p.end()
+
+class Simple_drawing_window1(QWidget):
+    def __init__(self):
+        QWidget.__init__(self, None)
+        self.setWindowTitle("Simple Drawing")
+        self.apple = QPixmap("images/apple.png")
+
+    def paintEvent(self, e):
+        p = QPainter()
+        p.begin(self)
+
+        p.drawPixmap(QRect(200, 100, 320, 320), self.apple)
+        p.end()
         
 class Simple_drawing_window2(QWidget):
     def __init__(self):
@@ -75,19 +88,6 @@ class Simple_drawing_window_3(QWidget):
         for x in range(24):
             p.drawEllipse(250, 250, 100, 100)
             p.rotate(15)
-        p.end()
-
-class Simple_drawing_window1(QWidget):
-    def __init__(self):
-        QWidget.__init__(self, None)
-        self.setWindowTitle("Simple Drawing")
-        self.apple = QPixmap("images/apple.png")
-
-    def paintEvent(self, e):
-        p = QPainter()
-        p.begin(self)
-
-        p.drawPixmap(QRect(200, 100, 320, 320), self.apple)
         p.end()
 
 def main():
