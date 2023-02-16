@@ -31,6 +31,18 @@ class DrawingWindow(QWidget):
             self.previousPoint = e.pos()
             self.update()
 
+    def mouseReleaseEvent(self, e):
+        if e.button() == Qt.LeftButton:
+            self.drawing = False
+
+    def paintEvent(self, e):
+        canvasPainter = QPainter(self)
+        canvasPainter.drawImage(self.rect(), self.image, self.image.rect())
+
+#    def clear(self):
+#        self.image.fill(Qt.white)
+#        self.update()
+
 
 
 
